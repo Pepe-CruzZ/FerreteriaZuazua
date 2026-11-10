@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Materiales Zuazua | Inventario</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<header>
+  <div>
+    <h1> Materiales Zuazua</h1>
+    <small>Inventario, ventas y reabastecimiento</small>
+  </div>
+
+  <nav id="navigation">
+    <button data-page="inicio" class="active">Inicio</button>
+    <button data-page="inventario">Inventario</button>
+    <button data-page="ventas">Ventas</button>
+    <button data-page="entradas">Entradas</button>
+    <button data-page="salidas">Salidas</button>
+    <button data-page="historial">Historial</button>
+    <button data-page="ajustes">Ajustes</button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- PANEL PRINCIPAL -->
+  <section id="inicio" class="page active">
+    <h2>Panel general</h2>
+    <p class="lead">
+      Existencias y decisiones para el próximo pedido.
+    </p>
+
+    <div class="cards">
+      <div class="card">
+        <span>Ingresos por ventas</span>
+        <strong id="k-sales">$0.00</strong>
+      </div>
+      <div class="card">
+        <span>Utilidad real estimada</span>
+        <strong id="k-profit">$0.00</strong>
+      </div>
+      <div class="card">
+        <span>Reservar para reinvertir</span>
+        <strong id="k-reserve">$0.00</strong>
+      </div>
+      <div class="card">
+        <span>Disponible tras reservar</span>
+        <strong id="k-free">$0.00</strong>
+      </div>
+    </div>
+
+    <div class="two">
+      <div class="panel">
+        <div class="panel-head">
+          <h3>⚠️ Alertas de inventario</h3>
+          <button class="btn secondary small"
+                  onclick="showPage('inventario')">
+            Ver todo
+          </button>
+        </div>
+        <div id="alerts"></div>
+      </div>
+
+      <div class="panel">
+        <h3>Cómo funciona el pronóstico</h3>
+        <p class="footer-note">
+          El sistema analiza el promedio de ventas de los
+          últimos 30 días para calcular cuánto tiempo
+          durará la mercancía.
+        </p>
+
+        <div class="notice">
+          Monterrey:
+          <b id="d-mty">4</b> días de entrega.
+          <br>
+          Lampazos:
+          <b id="d-lmp">2</b> días de entrega.
+        </div>
+
+        <p class="footer-note">
+          Se recomienda pedir antes de que se agote
+          el producto, considerando tiempo de entrega
+          y días de seguridad.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- INVENTARIO -->
+  <section id="inventario" class="page">
+    <h2>Inventario y pronóstico</h2>
+    <p class="lead">
+      Control de los 12 productos más vendidos.
+    </p>
+
+    <div class="panel">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Producto / origen</th>
+              <th>Existencia</th>
+              <th>Costo / venta</th>
+              <th>Venta diaria</th>
+              <th>Duración</th>
+              <th>Agotamiento estimado</th>
+              <th>Pedir el</th>
+              <th>Estado</th>
+              <th>Editar</th>
+            </tr>
+          </thead>
+          <tbody id="inventory-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <p class="footer-note">
+      Las fechas son estimaciones basadas en las
+      ventas registradas y no son garantías.
+    </p>
+  </section>
+
+  <!-- VENTAS -->
+  <section id="ventas" class="page">
+    <h2>Registrar venta</h2>
+    <p class="lead">
+      Registra varios productos en una sola venta.
+    </p>
+
+    <div class="two">
+      <form id="sale-form" class="panel">
+
+        <div class="form-grid">
+          <label class="field">
+            Fecha
+            <input type="date" id="sale-date" required>
+          </label>
+
+          <label class="field">
+            Nota / ticket
+            <input id="sale-note"
+                   placeholder="Opcional"
+                   maxlength="100">
+          </label>
+        </div>
+
+        <h3 style="margin-top:22px">
+          Productos vendidos
+        </h3>
+
+        <div id="sale-lines"></div>
+
+        <button type="button"
+                class="btn secondary"
+                id="add-sale">
+          + Agregar producto
+        </button>
+
+        <div class="actions">
+          <strong id="sale-total">$0.00</strong>
+          <button class="btn primary" type="submit">
+            Guardar venta
+          </button>
+        </div>
+      </form>
+
+      <aside class="panel">
+        <h3>Registro de ventas</h3>
+        <div class="help">
+          Cada venta descuenta automáticamente
+          la mercancía del inventario.
+
+          También se registran las cantidades,
+          los ingresos y los costos para calcular
+          la utilidad de cada operación.
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ENTRADAS DE MERCANCÍA -->
+  <section id="entradas" class="page">
+    <h2>Entradas de mercancía</h2>
+    <p class="lead">
+      Registra la mercancía recibida de los proveedores.
+    </p>
+
+    <div class="two">
+      <form id="buy-form" class="panel">
+
+        <div class="form-grid">
+          <label class="field">
+            Fecha de recepción
+            <input type="date" id="buy-date" required>
+          </label>
+
+          <label class="field">
+            Procedencia
+            <select id="buy-origin">
+              <option>Monterrey</option>
+              <option>Lampazos</option>
+            </select>
+          </label>
+
+          <label class="field">
+            Tipo de entrada
+            <select id="buy-kind">
+              <option value="compra">
+                Compra al proveedor
+              </option>
+              <option value="inicial">
+                Inventario inicial
+              </option>
+            </select>
+          </label>
+
+          <label class="field">
+            Folio / nota
+            <input id="buy-note"
+                   placeholder="Opcional"
+                   maxlength="100">
+          </label>
+        </div>
+
+        <h3 style="margin-top:22px">
+          Productos recibidos
+        </h3>
+
+        <div id="buy-lines"></div>
+
+        <button type="button"
+                class="btn secondary"
+                id="add-buy">
+          + Agregar producto
+        </button>
+
+        <div class="form-grid" style="margin-top:18px">
+          <label class="field">
+            Flete ($)
+            <input type="number"
+                   id="freight"
+                   min="0"
+                   step="0.01"
+                   value="0" required>
+          </label>
+
+          <label class="field">
+            Maniobras ($)
+            <input type="number"
+                   id="handling"
+                   min="0"
+                   step="0.01"
+                   value="0" required>
+          </label>
+        </div>
+
+        <div class="actions">
+          <strong id="buy-total">$0.00</strong>
+          <button class="btn primary" type="submit">
+            Guardar entrada
+          </button>
+        </div>
+      </form>
+
+      <aside class="panel">
+        <h3>Costos reales</h3>
+        <div class="help">
+          El sistema considera el precio de compra,
+          los gastos de flete y las maniobras de
+          carga y descarga.
+
+          Estos gastos se integran al costo
+          de la mercancía para calcular
+          una utilidad más precisa.
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- SALIDAS -->
+  <section id="salidas" class="page">
+    <h2>Salidas sin venta</h2>
+    <p class="lead">
+      Para productos dañados, mermas o uso interno.
+    </p>
+
+    <form id="out-form" class="panel">
+      <div class="form-grid">
+
+        <label class="field">
+          Fecha
+          <input id="out-date" type="date" required>
+        </label>
+
+        <label class="field">
+          Producto
+          <select id="out-product"></select>
+        </label>
+
+        <label class="field">
+          Cantidad
+          <input id="out-qty"
+                 type="number"
+                 min="0.01"
+                 step="any" required>
+        </label>
+
+        <label class="field">
+          Motivo
+          <select id="out-reason">
+            <option>Merma</option>
+            <option>Rotura</option>
+            <option>Uso interno</option>
+            <option>Ajuste de inventario</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="actions">
+        <span class="muted">
+          Esta operación no genera ingresos.
+        </span>
+        <button class="btn primary" type="submit">
+          Guardar salida
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <!-- HISTORIAL -->
+  <section id="historial" class="page">
+    <h2>Historial de operaciones</h2>
+    <p class="lead">
+      Consulta las ventas, entradas y salidas registradas.
+    </p>
+
+    <div class="panel">
+      <div class="filters">
+        <label class="field">
+          Tipo de movimiento
+          <select id="history-filter">
+            <option value="todos">Todos</option>
+            <option value="venta">Ventas</option>
+            <option value="entrada">Entradas</option>
+            <option value="salida">Salidas</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Movimiento</th>
+              <th>Detalle</th>
+              <th>Importe</th>
+              <th>Nota</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody id="history-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONFIGURACIÓN -->
+  <section id="ajustes" class="page">
+    <h2>Configuración y respaldos</h2>
+    <p class="lead">
+      Ajusta los tiempos de entrega y la demanda.
+    </p>
+
+    <div class="two">
+      <form class="panel" id="config-form">
+        <h3>Estimación de pedidos</h3>
+
+        <div class="form-grid">
+          <label class="field">
+            Ciclo objetivo (días)
+            <input id="cycle" type="number"
+                   min="7" max="120" required>
+          </label>
+
+          <label class="field">
+            Días de seguridad
+            <input id="safety" type="number"
+                   min="0" max="30" required>
+          </label>
+
+          <label class="field">
+            Entrega Monterrey (días)
+            <input id="days-mty" type="number"
+                   min="1" max="30" required>
+          </label>
+
+          <label class="field">
+            Entrega Lampazos (días)
+            <input id="days-lmp" type="number"
+                   min="1" max="30" required>
+          </label>
+        </div>
+
+        <div class="actions">
+          <span></span>
+          <button class="btn primary" type="submit">
+            Guardar ajustes
+          </button>
+        </div>
+      </form>
+
+      <div class="panel">
+        <h3>Copias de seguridad</h3>
+
+        <p class="footer-note">
+          Los datos se guardan en el navegador.
+          Puedes exportarlos e importarlos.
+        </p>
+
+        <button id="export" class="btn secondary">
+          Descargar respaldo JSON
+        </button>
+
+        <label class="field" style="margin:16px 0">
+          Importar respaldo JSON
+          <input id="import" type="file"
+                 accept=".json,application/json">
+        </label>
+
+        <button id="reset" class="btn danger-button">
+          Borrar todos los datos
+        </button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- VENTANA PARA EDITAR PRODUCTOS -->
+<dialog id="edit-modal" class="edit-dialog"
+        aria-labelledby="edit-title">
+
+  <form id="edit-form" class="edit-form">
+
+    <div class="edit-header">
+      <div class="edit-icon"></div>
+
+      <div>
+        <h2 id="edit-title">Editar producto</h2>
+        <p>Modifica la información del inventario</p>
+      </div>
+    </div>
+
+    <div class="edit-content">
+
+      <input type="hidden" id="edit-product-id">
+
+      <div class="edit-product-info">
+        <strong id="edit-product-name"></strong>
+        <span id="edit-product-origin"></span>
+      </div>
+
+      <label class="field">
+        Costo de compra ($)
+        <input
+          type="number"
+          id="edit-cost"
+          min="0"
+          step="0.01"
+          required
+        >
+      </label>
+
+      <label class="field">
+        Precio de venta ($)
+        <input
+          type="number"
+          id="edit-price"
+          min="0"
+          step="0.01"
+          required
+        >
+      </label>
+
+      <label class="field">
+        Venta diaria inicial estimada
+        <input
+          type="number"
+          id="edit-estimate"
+          min="0"
+          step="0.01"
+          required
+        >
+      </label>
+
+      <p class="edit-note">
+        La venta diaria estimada se utiliza cuando
+        todavía no existe historial de ventas.
+      </p>
+
+    </div>
+
+    <div class="edit-actions">
+      <button type="button"
+              class="btn secondary"
+              id="edit-cancel">
+        Cancelar
+      </button>
+
+      <button type="submit"
+              class="btn primary">
+        Guardar cambios
+      </button>
+    </div>
+
+  </form>
+</dialog>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<!-- Conexión con JavaScript -->
+<script src="script.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,553 @@
+:root {
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: #1d2939;
+  background: #f3f6fa;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* ENCABEZADO Y MENÚ */
+header {
+  background: #112b3d;
+  color: white;
+  padding: 20px 4%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 23px;
+}
+
+header small {
+  color: #a9c7d7;
+}
+
+nav {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+nav button {
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #d4e1ea;
+  padding: 9px 12px;
+}
+
+nav button.active,
+nav button:hover {
+  background: #23688c;
+  color: white;
+}
+
+/* CONTENIDO GENERAL */
+main {
+  max-width: 1240px;
+  margin: auto;
+  padding: 27px 18px 60px;
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+h2 {
+  margin: 0 0 5px;
+  font-size: 25px;
+}
+
+h3 {
+  font-size: 17px;
+  margin: 0 0 14px;
+}
+
+.muted {
+  color: #66768a;
+}
+
+.lead {
+  margin: 0 0 22px;
+  color: #66768a;
+}
+
+/* TARJETAS DEL PANEL */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin: 20px 0;
+}
+
+.card,
+.panel {
+  background: white;
+  border: 1px solid #e1e8ef;
+  border-radius: 13px;
+  box-shadow: 0 3px 12px #22334b07;
+}
+
+.card {
+  padding: 18px;
+}
+
+.card span {
+  display: block;
+  color: #66768a;
+  font-size: 13px;
+}
+
+.card strong {
+  display: block;
+  font-size: 25px;
+  margin-top: 9px;
+}
+
+.panel {
+  padding: 20px;
+  margin: 15px 0;
+}
+
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ESTADOS DE INVENTARIO */
+.tag {
+  padding: 5px 9px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.ok {
+  background: #e3f6eb;
+  color: #157347;
+}
+
+.warn {
+  background: #fff1d0;
+  color: #986000;
+}
+
+.danger {
+  background: #ffe4e6;
+  color: #b42332;
+}
+
+.quiet {
+  background: #edf2f7;
+  color: #596b7e;
+}
+
+/* TABLAS */
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 760px;
+  text-align: left;
+}
+
+th,
+td {
+  padding: 13px 10px;
+  border-bottom: 1px solid #e8edf3;
+  font-size: 14px;
+}
+
+th {
+  color: #62748a;
+  background: #f8fafc;
+  font-weight: 650;
+}
+
+tr:last-child td {
+  border: 0;
+}
+
+/* BOTONES */
+button.primary {
+  background: #176f98;
+  color: white;
+  border: 1px solid #176f98;
+}
+
+button.secondary {
+  background: white;
+  color: #176f98;
+  border: 1px solid #bdd1df;
+}
+
+button.danger-button {
+  background: white;
+  color: #b42332;
+  border: 1px solid #f0c3c7;
+}
+
+.btn {
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-weight: 600;
+}
+
+.small {
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+/* FORMULARIOS */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: #56677b;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid #cbd6e1;
+  border-radius: 8px;
+  padding: 10px;
+  color: #26374a;
+  background: white;
+  min-width: 0;
+}
+
+input:focus,
+select:focus {
+  outline: 2px solid #9ccee7;
+}
+
+/* PRODUCTOS EN VENTAS Y ENTRADAS */
+.line {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr auto;
+  gap: 9px;
+  align-items: end;
+  margin: 9px 0;
+}
+
+.line label {
+  display: grid;
+  gap: 5px;
+  color: #62748a;
+  font-size: 12px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+.actions strong {
+  font-size: 22px;
+}
+
+.two {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(270px, 1fr);
+  gap: 16px;
+}
+
+/* MENSAJES Y ALERTAS */
+.help {
+  background: #f0f7fa;
+  border-radius: 9px;
+  padding: 15px;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.notice {
+  padding: 13px 15px;
+  border-left: 4px solid #e2a432;
+  background: #fff9e9;
+  border-radius: 7px;
+  margin: 14px 0;
+}
+
+#alerts > div {
+  padding: 10px 0;
+  border-bottom: 1px solid #e9edf3;
+}
+
+#alerts > div:last-child {
+  border: 0;
+}
+
+.footer-note {
+  color: #6e7e91;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#toast {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background: #19384b;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 9px;
+  display: none;
+  box-shadow: 0 5px 20px #0003;
+  max-width: 360px;
+  z-index: 10;
+}
+
+/* RESPONSIVE PARA CELULARES */
+@media (max-width: 920px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .two {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .card strong {
+    font-size: 19px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .line {
+    grid-template-columns: 1.4fr 1fr;
+  }
+
+  .line label:nth-child(3) {
+    grid-column: 1;
+  }
+
+  .line button {
+    align-self: end;
+  }
+
+  header {
+    padding: 17px;
+  }
+
+  nav {
+    width: 100%;
+  }
+
+  nav button {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .panel {
+    padding: 13px;
+  }
+}
+
+/* ======================================
+   VENTANA PERSONALIZADA DE EDICIÓN
+====================================== */
+
+.edit-dialog {
+  width: min(92%, 500px);
+  max-height: 90vh;
+  padding: 0;
+  border: 1px solid #e1e8ef;
+  border-radius: 18px;
+  background: #ffffff;
+  color: #1d2939;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  overflow-y: auto;
+}
+
+/* Fondo oscuro detrás del cuadro */
+.edit-dialog::backdrop {
+  background: rgba(10, 25, 40, 0.65);
+  backdrop-filter: blur(4px);
+}
+
+/* Encabezado */
+.edit-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 24px;
+  background: #f1f7fb;
+  border-bottom: 1px solid #e0eaf2;
+}
+
+.edit-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 13px;
+  background: #dcecf5;
+  font-size: 24px;
+}
+
+.edit-header h2 {
+  margin: 0 0 5px;
+  font-size: 21px;
+  color: #123b53;
+}
+
+.edit-header p {
+  margin: 0;
+  color: #738397;
+  font-size: 13px;
+}
+
+/* Contenido */
+.edit-content {
+  padding: 24px;
+}
+
+.edit-product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 15px;
+  background: #f5f8fb;
+  border-radius: 10px;
+  margin-bottom: 22px;
+}
+
+.edit-product-info strong {
+  font-size: 17px;
+  color: #173f58;
+}
+
+.edit-product-info span {
+  color: #728398;
+  font-size: 13px;
+}
+
+/* Campos de edición */
+.edit-content .field {
+  margin-bottom: 18px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #33465b;
+}
+
+.edit-content input {
+  margin-top: 5px;
+  padding: 12px;
+  border: 1px solid #cbd6e1;
+  border-radius: 9px;
+  font-size: 15px;
+  background: #ffffff;
+}
+
+.edit-content input:focus {
+  outline: none;
+  border-color: #176f98;
+  box-shadow: 0 0 0 3px rgba(23, 111, 152, 0.13);
+}
+
+.edit-note {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #718197;
+  margin: 0;
+}
+
+/* Botones */
+.edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 18px 24px;
+  border-top: 1px solid #e7edf3;
+  background: #fafcfe;
+}
+
+.edit-actions button {
+  min-width: 115px;
+  transition: 0.2s;
+}
+
+.edit-actions .primary:hover {
+  background: #105677;
+}
+
+.edit-actions .secondary:hover {
+  background: #edf5fa;
+}
+
+/* Diseño para celular */
+@media (max-width: 480px) {
+  .edit-header,
+  .edit-content {
+    padding: 18px;
+  }
+
+  .edit-actions {
+    padding: 15px 18px;
+  }
+
+  .edit-actions button {
+    min-width: 0;
+    flex: 1;
+  }
+}

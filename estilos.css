@@ -551,3 +551,170 @@ select:focus {
     flex: 1;
   }
 }
+
+/* =====================================
+   MENÚ ESTILO SIMC - MATERIALES ZUAZUA
+===================================== */
+
+.mz-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  width: 100%;
+  margin: 0;
+  padding: 15px 4%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 20px;
+
+  background: #112b3d;
+  opacity: 1;
+  transform: none;
+  border-radius: 0;
+
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Nombre del negocio */
+.mz-brand {
+  flex-shrink: 0;
+}
+
+.mz-brand h1 {
+  color: #ffffff;
+  font-size: 22px;
+  margin: 0;
+}
+
+.mz-brand small {
+  color: #a9c7d7;
+  font-size: 12px;
+}
+
+/* Menú de navegación */
+#navigation {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  gap: 4px;
+  width: auto;
+  max-width: none;
+  overflow: visible;
+}
+
+/* Botones del menú */
+#navigation button {
+  background: transparent;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  border-radius: 0;
+
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+
+  padding: 12px 10px;
+  white-space: nowrap;
+
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+/* Al pasar el cursor */
+#navigation button:hover {
+  background: transparent;
+  color: #52c3e5;
+  transform: none;
+}
+
+/* Apartado seleccionado */
+#navigation button.active {
+  background: transparent;
+  color: #52c3e5;
+  border-bottom-color: #52c3e5;
+  box-shadow: none;
+}
+
+/* Botón de menú móvil */
+.mz-toggle {
+  display: none;
+  background: transparent;
+  color: white;
+  border: 0;
+  font-size: 28px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.mz-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* =====================================
+   DISEÑO PARA CELULARES Y TABLETAS
+===================================== */
+
+@media (max-width: 1030px) {
+
+  .mz-header {
+    padding: 14px 20px;
+  }
+
+  .mz-brand h1 {
+    font-size: 19px;
+  }
+
+  /* Mostrar botón hamburguesa */
+  .mz-toggle {
+    display: block;
+    margin-left: auto;
+  }
+
+  /* Ocultar menú inicialmente */
+  #navigation {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+
+    width: 100%;
+    max-height: calc(100dvh - 85px);
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding: 12px 20px;
+    background: #112b3d;
+
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+
+    box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+  }
+
+  /* Mostrar menú al abrir */
+  #navigation.is-open {
+    display: flex;
+  }
+
+  #navigation button {
+    width: 100%;
+    text-align: left;
+    padding: 15px;
+
+    border-bottom: 1px solid
+      rgba(255,255,255,0.12);
+  }
+
+  #navigation button.active {
+    border-bottom-color: #52c3e5;
+  }
+}

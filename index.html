@@ -8,13 +8,24 @@
 </head>
 <body>
 
-<header>
-  <div>
-    <h1> Materiales Zuazua</h1>
-    <small>Inventario, ventas y reabastecimiento</small>
+<header class="mz-header">
+
+  <div class="mz-brand">
+    <h1>Materiales Zuazua</h1>
+    <small>Inventario y control de ventas</small>
   </div>
 
-  <nav id="navigation">
+  <button
+    id="menu-toggle"
+    class="mz-toggle"
+    type="button"
+    aria-label="Abrir menú"
+    aria-controls="navigation"
+    aria-expanded="false">
+    <span aria-hidden="true">☰</span>
+  </button>
+
+  <nav id="navigation" aria-label="Menú principal">
     <button data-page="inicio" class="active">Inicio</button>
     <button data-page="inventario">Inventario</button>
     <button data-page="ventas">Ventas</button>
@@ -23,6 +34,7 @@
     <button data-page="historial">Historial</button>
     <button data-page="ajustes">Ajustes</button>
   </nav>
+
 </header>
 
 <main>
@@ -56,7 +68,7 @@
     <div class="two">
       <div class="panel">
         <div class="panel-head">
-          <h3>⚠️ Alertas de inventario</h3>
+          <h3>⚠️ Alertas de inventario ⚠️</h3>
           <button class="btn secondary small"
                   onclick="showPage('inventario')">
             Ver todo

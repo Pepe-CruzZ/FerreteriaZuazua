@@ -1428,3 +1428,58 @@ function start() {
 }
 
 start();
+
+// =====================================
+// MENÚ DESPLEGABLE PARA CELULARES
+// =====================================
+
+(() => {
+  const botonMenu = document.getElementById("menu-toggle");
+  const menu = document.getElementById("navigation");
+
+  if (!botonMenu || !menu) return;
+
+  function cambiarMenu(abierto) {
+    menu.classList.toggle("is-open", abierto);
+
+    botonMenu.setAttribute(
+      "aria-expanded",
+      String(abierto)
+    );
+
+    botonMenu.setAttribute(
+      "aria-label",
+      abierto ? "Cerrar menú" : "Abrir menú"
+    );
+
+    botonMenu.querySelector("span").textContent =
+      abierto ? "✕" : "☰";
+  }
+
+  botonMenu.addEventListener("click", () => {
+    cambiarMenu(!menu.classList.contains("is-open"));
+  });
+
+  // Cerrar al seleccionar un apartado
+  menu.addEventListener("click", e => {
+    if (e.target.closest("button[data-page]")) {
+      cambiarMenu(false);
+    }
+  });
+
+  // Cerrar presionando Escape
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" &&
+        menu.classList.contains("is-open")) {
+      cambiarMenu(false);
+      botonMenu.focus();
+    }
+  });
+
+  // Restaurar menú al cambiar tamaño de pantalla
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 1030) {
+      cambiarMenu(false);
+    }
+  });
+})();
